@@ -29,7 +29,7 @@ jobs:
       DATABASE_URL: postgres://app:app@localhost:5432/app
       APP_URL: http://localhost:3000
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: oven-sh/setup-bun@v2
         with:
           # Version aus "packageManager" in package.json
@@ -64,7 +64,7 @@ jobs:
         run: bun run test:e2e
       - name: Playwright-Bericht und Traces hochladen
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: playwright-report
           path: |
@@ -80,7 +80,7 @@ jobs:
       # compose.yaml hat keinen Standardwert für APP_URL, ohne ihn startet der Dienst "app" nicht.
       APP_URL: http://localhost:3000
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Admin-Zugang erzeugen
         # Zufällig je Lauf und maskiert, wie die Seed-Passwörter im Job "check". compose.yaml
         # reicht ADMIN_EMAIL und ADMIN_PASSWORD an den Dienst "app" weiter.
