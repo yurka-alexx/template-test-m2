@@ -1,0 +1,3 @@
+[test]
+# Unit-Tests nur unter src/, Playwright-Tests liegen später in e2e/.
+root = "src"

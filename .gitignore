@@ -1,0 +1,13 @@
+node_modules/
+dist/
+coverage/
+# Playwright: Ergebnisse, Traces und HTML-Bericht
+e2e/test-results/
+e2e/playwright-report/
+*.log
+.DS_Store
+
+# Lokale Umgebung, nur .env.example gehört ins Repo
+.env
+.env.*
+!.env.example

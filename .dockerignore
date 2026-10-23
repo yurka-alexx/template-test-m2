@@ -1,0 +1,10 @@
+# Nicht ins Image: Git, lokale Abhängigkeiten und Builds (werden im Image neu erzeugt),
+# Geheimnisse (Bun würde eine .env im Container sonst selbst laden) und Playwright-Ausgaben.
+.git
+node_modules
+dist
+.env
+.env.*
+!.env.example
+e2e/test-results
+e2e/playwright-report

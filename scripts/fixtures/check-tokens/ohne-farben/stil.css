@@ -1,0 +1,6 @@
+/* Beispiel für check:tokens: Farben nur über Variablen aus der Token-Datei. */
+.a {
+  color: var(--foreground);
+  background: color-mix(in oklab, var(--primary) 50%, transparent);
+  border-color: currentColor;
+}

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Starter react-shadcn</title>
+    <script>
+      // Farbschema vor dem ersten Rendern setzen, damit nichts hell aufblitzt.
+      // Gleiche Regeln wie src/client/lib/theme.ts (src/client/lib/theme.test.ts prüft das).
+      (() => {
+        let theme = "system";
+        try {
+          theme = localStorage.getItem("theme") || "system";
+        } catch {}
+        const dark =
+          theme === "dunkel" ||
+          (theme !== "hell" && matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.classList.toggle("dark", dark);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/client/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+# Monatliche, gebündelte Updates: je Ökosystem ein Pull Request mit allen fälligen Updates.
+# Repos aus dem Template übernehmen die Datei und bekommen eigene Pull Requests, Updates des
+# Starters selbst kommen dort nicht an. src/server/docs.test.ts prüft Intervall und Gruppen.
+version: 2
+updates:
+  # package.json und bun.lock
+  - package-ecosystem: bun
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      abhaengigkeiten:
+        patterns: ["*"]
+
+  # .github/workflows/
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # Dockerfile (Basis-Image)
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      images:
+        patterns: ["*"]

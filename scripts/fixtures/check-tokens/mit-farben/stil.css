@@ -1,0 +1,6 @@
+/* Beispiel für check:tokens: Jede Zeile mit "Fund: …" muss genau mit diesem Treffer gemeldet werden. */
+.a {
+  color: hsl(210 40% 50%); /* Fund: hsl( */
+  background: oklch(0.5 0.1 260); /* Fund: oklch( */
+  border-color: #a1b2c3d4; /* Fund: #a1b2c3d4 */
+}

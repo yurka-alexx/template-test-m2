@@ -1,0 +1,41 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+      POSTGRES_DB: app
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h localhost -U app -d app"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+
+  # Gebautes Image mit API und Oberfläche: docker compose up --build, dann http://localhost:3000.
+  # bun run dev startet nur "db", für "app" muss bun run dev beendet sein (Port 3000).
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://app:app@db:5432/app
+      # Aus der Umgebung oder der .env im Repo (lokal http://localhost:3000), Pflicht
+      APP_URL: ${APP_URL:-}
+      # Staging-Schutz: beide gesetzt, dann Basic Auth vor allem außer GET /healthz
+      BASIC_AUTH_USER: ${BASIC_AUTH_USER:-}
+      BASIC_AUTH_PASSWORD: ${BASIC_AUTH_PASSWORD:-}
+      # Optional aus der Umgebung des Rechners (leer gilt als nicht gesetzt)
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+      SEED_ADMIN_PASSWORD: ${SEED_ADMIN_PASSWORD:-}
+      SEED_USER_PASSWORD: ${SEED_USER_PASSWORD:-}
+    ports:
+      - "3000:3000"
+
+volumes:
+  db-data:
